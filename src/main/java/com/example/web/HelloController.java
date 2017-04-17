@@ -1,17 +1,30 @@
 package com.example.web;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.model.User;
+import com.example.service.UserService;
 
 /**
  * Created by shijianfeng on 2017/2/28.
  */
 @RestController
 public class HelloController {
+	
+	@Autowired
+	private UserService userService;
 
-    @RequestMapping(value = "hello", method = RequestMethod.GET)
-    public String say(){
-        return "";
+    @GetMapping("/")
+    public String sayHello(){
+        return "hello";
+    }
+    
+
+    @PostMapping("/getUser")
+    public User getUser(String name){
+    	return userService.findUser(name);
     }
 }
